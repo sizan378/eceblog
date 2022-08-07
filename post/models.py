@@ -7,3 +7,7 @@ class ArticleModle(models.Model):
     status = models.BooleanField(default=False)
     created_at = models.DateField()
     updated_at = models.DateField()
+
+
+    def __str__(self):
+        return self.title

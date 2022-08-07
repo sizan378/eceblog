@@ -1,5 +1,5 @@
 from rest_framework.serializers import ModelSerializer
-from django.contrib.auth.models import User
+from django.contrib.auth.models import User, Group
 
 # User Serializer
 class UserSerializer(ModelSerializer):
@@ -18,3 +18,14 @@ class RegisterSerializer(ModelSerializer):
         user = User.objects.create_user(validated_data['username'], validated_data['email'], validated_data['password'])
 
         return user
+
+
+class AdminPanelSerializer(ModelSerializer):
+    class Meta:
+        model = User
+        fields = "__all__"
+
+class AdminGroupSerializer(ModelSerializer):
+    class Meta:
+        model = Group
+        fields = '__all__'

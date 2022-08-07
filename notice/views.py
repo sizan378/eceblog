@@ -7,18 +7,17 @@ from rest_framework.views import APIView
 from rest_framework.response import Response
 from rest_framework import status
 from rest_framework.generics import GenericAPIView
-from drf_yasg.utils import swagger_auto_schema
+# from rest_framework import authentication, IsA
 
 class NoticeListView(GenericAPIView):
     
-    # @swagger_auto_schema(operation_description="This is get method")
     serializer_class = NoticeSerializer
     def get(self, request, format=None):
         notice = NoticeModel.objects.all()
         serializer = NoticeSerializer(notice, many=True)
         return Response(serializer.data)
 
-    # @swagger_auto_schema(operation_description="This is post method")
+    # permission_classes = [IsAuthenticatedOrReadOnly]
     serializer_class = NoticeSerializer
     def post(self, request, format=None):
         serializer = NoticeSerializer(data=request.data)
@@ -30,21 +29,21 @@ class NoticeListView(GenericAPIView):
 
 class NoticeDetailView(GenericAPIView):
    
+    serializer_class = NoticeSerializer
     def get_object(self, pk):
-        serializer_class = NoticeSerializer
         try:
             return NoticeModel.objects.get(pk=pk)
         except NoticeModel.DoesNotExist:
             raise Http404
 
-    # @swagger_auto_schema(operation_description="This is get details")
+    serializer_class = NoticeSerializer
     def get(self, request, pk, format=None):
         serializer_class = NoticeSerializer
         notice = self.get_object(pk)
         serializer = NoticeSerializer(notice)
         return Response(serializer.data)
 
-    # @swagger_auto_schema(operation_description="This is put method")
+    serializer_class = NoticeSerializer
     def put(self, request, pk, format=None):
         serializer_class = NoticeSerializer
         notice = self.get_object(pk)

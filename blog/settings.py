@@ -46,8 +46,6 @@ INSTALLED_APPS = [
     'post',
     'userprofile',
     'account',
-    'phonenumber_field',
-    'phonenumbers',
     
 ]
 

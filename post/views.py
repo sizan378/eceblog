@@ -9,13 +9,15 @@ from rest_framework import status
 from rest_framework.generics import GenericAPIView
 
 class ArticleListView(GenericAPIView):
-   
+    
+    queryset = ArticleModle.objects.all()
     serializer_class = ArticleSerializer
     def get(self, request, format=None):
         article = ArticleModle.objects.all()
         serializer = ArticleSerializer(article, many=True)
         return Response(serializer.data)
 
+    queryset = ArticleModle.objects.all()
     serializer_class = ArticleSerializer
     def post(self, request, format=None):
         serializer = ArticleSerializer(data=request.data)
@@ -26,7 +28,8 @@ class ArticleListView(GenericAPIView):
 
 
 class ArticleDetailView(GenericAPIView):
-   
+    
+    queryset = ArticleModle.objects.all()
     serializer_class = ArticleSerializer
     def get_object(self, pk):
         try:
@@ -34,12 +37,14 @@ class ArticleDetailView(GenericAPIView):
         except ArticleModle.DoesNotExist:
             raise Http404
 
+    queryset = ArticleModle.objects.all()
     serializer_class = ArticleSerializer
     def get(self, request, pk, format=None):
         article = self.get_object(pk)
         serializer = ArticleSerializer(article)
         return Response(serializer.data)
 
+    queryset = ArticleModle.objects.all()
     serializer_class = ArticleSerializer
     def put(self, request, pk, format=None):
         article = self.get_object(pk)

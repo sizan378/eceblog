@@ -30,8 +30,8 @@ urlpatterns = [
     path('docs/', schema_view.with_ui('redoc', cache_timeout=0), name='schema-redoc'),
 
     #app path
-    path('api/v1/notice',include('notice.urls')),
-    path('api/v1/post',include('post.urls')),
-    path('api/v1/userprofile',include('userprofile.urls')),
+    path('api/v1/notice/',include('notice.urls')),
+    path('api/v1/post/',include('post.urls')),
+    path('api/v1/userprofile/',include('userprofile.urls')),
     path('api/v1/account/',include('account.urls')),
 ]

@@ -15,6 +15,7 @@ class NoticeListView(GenericAPIView):
     queryset = NoticeModel.objects.all()
     serializer_class = NoticeSerializer
     pagination_class = CustomNumberPagination
+
     def get(self, request, format=None):
         notice = NoticeModel.objects.all()
         serializer = NoticeSerializer(notice, many=True)
@@ -23,7 +24,9 @@ class NoticeListView(GenericAPIView):
     # permission_classes = [IsAuthenticatedOrReadOnly]
     queryset = NoticeModel.objects.all()
     serializer_class = NoticeSerializer
+
     permission_classes = (IsAdminUser, IsAuthenticated, )
+
     def post(self, request, format=None):
         serializer = NoticeSerializer(data=request.data)
         if serializer.is_valid():
@@ -36,26 +39,29 @@ class NoticeDetailView(GenericAPIView):
    
     queryset = NoticeModel.objects.all()
     serializer_class = NoticeSerializer
+    permission_classes = (IsAuthenticated,)
+
     def get_object(self, pk):
         try:
             return NoticeModel.objects.get(pk=pk)
         except NoticeModel.DoesNotExist:
             raise Http404
 
-    queryset = NoticeModel.objects.all()
-    serializer_class = NoticeSerializer
-    permission_classes = (IsAuthenticated,)
+
+    
     def get(self, request, pk, format=None):
         notice = self.get_object(pk)
         serializer = NoticeSerializer(notice)
         return Response(serializer.data)
 
-    queryset = NoticeModel.objects.all()
-    serializer_class = NoticeSerializer
+
     permission_classes = (IsAdminUser, IsAuthenticated)
+
     def put(self, request, pk, format=None):
+        
         notice = self.get_object(pk)
         serializer = NoticeSerializer(notice, data=request.data)
+
         if serializer.is_valid():
             serializer.save()
             return Response(serializer.data)

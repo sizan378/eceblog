@@ -50,8 +50,10 @@ class ArticleDetailView(GenericAPIView):
         return Response(serializer.data)
 
     def put(self, request, pk, format=None):
+
         article = self.get_object(pk)
         serializer = ArticleSerializer(article, data=request.data)
+        
         if serializer.is_valid():
             serializer.save()
             return Response(serializer.data)

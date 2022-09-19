@@ -7,18 +7,22 @@ from rest_framework.views import APIView
 from rest_framework.response import Response
 from rest_framework import status
 from rest_framework.generics import GenericAPIView
+from post.pagination import CustomNumberPagination
 
 class ArticleListView(GenericAPIView):
     
     queryset = ArticleModle.objects.all()
     serializer_class = ArticleSerializer
+    pagination_class = CustomNumberPagination
+
     def get(self, request, format=None):
         article = ArticleModle.objects.all()
         serializer = ArticleSerializer(article, many=True)
+        
         return Response(serializer.data)
 
-    queryset = ArticleModle.objects.all()
-    serializer_class = ArticleSerializer
+
+
     def post(self, request, format=None):
         serializer = ArticleSerializer(data=request.data)
         if serializer.is_valid():
@@ -31,21 +35,20 @@ class ArticleDetailView(GenericAPIView):
     
     queryset = ArticleModle.objects.all()
     serializer_class = ArticleSerializer
+    pagination_class = CustomNumberPagination
+
     def get_object(self, pk):
         try:
             return ArticleModle.objects.get(pk=pk)
         except ArticleModle.DoesNotExist:
             raise Http404
 
-    queryset = ArticleModle.objects.all()
-    serializer_class = ArticleSerializer
+
     def get(self, request, pk, format=None):
         article = self.get_object(pk)
         serializer = ArticleSerializer(article)
         return Response(serializer.data)
 
-    queryset = ArticleModle.objects.all()
-    serializer_class = ArticleSerializer
     def put(self, request, pk, format=None):
         article = self.get_object(pk)
         serializer = ArticleSerializer(article, data=request.data)

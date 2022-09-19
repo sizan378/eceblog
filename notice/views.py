@@ -7,12 +7,14 @@ from rest_framework.permissions import IsAuthenticated, IsAdminUser
 from rest_framework.response import Response
 from rest_framework import status
 from rest_framework.generics import GenericAPIView
+from post.pagination import CustomNumberPagination
 # from rest_framework import authentication, IsA
 
 class NoticeListView(GenericAPIView):
     
     queryset = NoticeModel.objects.all()
     serializer_class = NoticeSerializer
+    pagination_class = CustomNumberPagination
     def get(self, request, format=None):
         notice = NoticeModel.objects.all()
         serializer = NoticeSerializer(notice, many=True)

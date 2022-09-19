@@ -5,7 +5,7 @@ class UserProfileModel(models.Model):
     first_name = models.CharField(max_length=50)
     last_name = models.CharField(max_length=50, null=True, blank=True)
     email = models.EmailField()
-    phone_regex = RegexValidator(regex=r'^01[3-9]\d{8}$', message="Phone number must be entered in the format: '+8801********6'. Up to 11 digits allowed.")
+    phone_regex = RegexValidator(regex=r'^01[3-9]\d{8}$', message="Phone number must be entered in the format: '+8801*********'. Up to 11 digits allowed.")
     phone_number = models.CharField(validators=[phone_regex], unique=True, max_length=11, blank=True)
     address = models.CharField(max_length=200)
     university = models.CharField(max_length=200)

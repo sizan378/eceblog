@@ -1,7 +1,8 @@
 from django.db import models
 
 
-class ArticleModle(models.Model):
+class ArticleModel(models.Model):
+    author_name = models.CharField(max_length=200)
     title = models.CharField(max_length=100)
     body = models.TextField()
     status = models.BooleanField(default=False)

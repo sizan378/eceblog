@@ -15,4 +15,4 @@ class RetrieveUpdateView(RetrieveUpdateAPIView):
     serializer_class = CommentSerializers
     queryset = CommentsModel.objects.all()
 
-    serializer = CommentSerializers(queryset, many=True)
+    # serializer = CommentSerializers(queryset, many=True)

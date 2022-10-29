@@ -1,4 +1,4 @@
-from django.shortcuts import render
+
 
 from rest_framework.generics import ListCreateAPIView, RetrieveUpdateAPIView
 
@@ -6,13 +6,13 @@ from comments.models import CommentsModel
 from comments.serializers import CommentSerializers
 
 
-class ListCreateView(ListCreateAPIView):
+class CommentsListView(ListCreateAPIView):
     queryset = CommentsModel.objects.all()
     serializer_class = CommentSerializers
 
 
-class RetrieveUpdateView(RetrieveUpdateAPIView):
-    serializer_class = CommentSerializers
+class CommentsRetrieveView(RetrieveUpdateAPIView):
     queryset = CommentsModel.objects.all()
+    serializer_class = CommentSerializers
 
     # serializer = CommentSerializers(queryset, many=True)

@@ -3,9 +3,9 @@ from django.http import Http404
 from rest_framework.views import APIView
 from rest_framework.response import Response
 from rest_framework import status
-from rest_framework.generics import GenericAPIView, ListCreateAPIView
+from rest_framework.generics import GenericAPIView, ListCreateAPIView, RetrieveAPIView
 
-from .models import ArticleModel, CategoryModel
+from post.models import ArticleModel, CategoryModel
 from .serializer import ArticleSerializer, CategorySerializer
 from post.pagination import CustomNumberPagination
 
@@ -59,5 +59,10 @@ class ArticleDetailView(GenericAPIView):
 
 
 class CategoryView(ListCreateAPIView):
+    queryset = CategoryModel.objects.all()
     serializer_class = CategorySerializer
-    queryset = CategoryModel
+
+
+class CategoryUpdateView(RetrieveAPIView):
+    serializer_class = CategorySerializer
+    queryset = CategoryModel.objects.all()

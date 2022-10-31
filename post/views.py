@@ -13,11 +13,17 @@ from post.pagination import CustomNumberPagination
 class ArticleListView(GenericAPIView):
 
     queryset = ArticleModel.objects.all()
+
     serializer_class = ArticleSerializer
     pagination_class = CustomNumberPagination
 
     def get(self, request, format=None):
+
         article = ArticleModel.objects.all()
+
+        user = request.user.username
+        print("user_name",user)
+
         serializer = ArticleSerializer(article, many=True)
 
         return Response(serializer.data)
@@ -59,5 +65,7 @@ class ArticleDetailView(GenericAPIView):
 
 
 class CategoryView(ListCreateAPIView):
+
+    queryset = CategoryModel.objects.all()
     serializer_class = CategorySerializer
-    queryset = CategoryModel
+    

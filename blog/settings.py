@@ -10,11 +10,11 @@ For the full list of settings and their values, see
 https://docs.djangoproject.com/en/4.1/ref/settings/
 """
 
+import os
 from pathlib import Path
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
-import os
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/4.1/howto/deployment/checklist/
@@ -25,7 +25,7 @@ SECRET_KEY = 'django-insecure-3)c6o0jl&tq&b&#*j@!oh#bdsii_(!7m8i0rms(+7lvq&(r_+f
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['*']
+ALLOWED_HOSTS = []
 
 
 # Application definition
@@ -40,15 +40,15 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'drf_yasg',
     'rest_framework',
-    'knox', 
-    
-    #FIle Name
+    # 'knox',
+
+    # FIle Name
     'notice',
     'post',
     'userprofile',
-    'account',
+    # 'account',
     'comments',
-    
+
 ]
 
 MIDDLEWARE = [
@@ -98,16 +98,18 @@ REST_FRAMEWORK = {
     'PAGE_SIZE': 5
 }
 
+
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'NAME': 'postgres', 
-        'USER': 'postgres', 
+        'NAME': 'postgres',
+        'USER': 'postgres',
         'PASSWORD': 'admin',
-        'HOST': 'localhost', 
+        'HOST': 'localhost',
         'PORT': '5432',
     }
 }
+
 
 REST_FRAMEWORK = {
     # Use Django's standard `django.contrib.auth` permissions,
@@ -116,11 +118,11 @@ REST_FRAMEWORK = {
         'rest_framework.permissions.AllowAny'
 
     ],
-    'DEFAULT_AUTHENTICATION_CLASSES': [
-        # 'rest_framework.authentication.BasicAuthentication',
-        # 'rest_framework.authentication.SessionAuthentication',
-        'knox.auth.TokenAuthentication',
-    ]
+    # 'DEFAULT_AUTHENTICATION_CLASSES': [
+    #     # 'rest_framework.authentication.BasicAuthentication',
+    #     # 'rest_framework.authentication.SessionAuthentication',
+    #     'knox.auth.TokenAuthentication',
+    # ]
 }
 
 # Password validation

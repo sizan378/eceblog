@@ -40,13 +40,13 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'drf_yasg',
     'rest_framework',
-    'knox',
+    # 'knox',
 
     # FIle Name
     'notice',
     'post',
     'userprofile',
-    'account',
+    # 'account',
     'comments',
 
 ]
@@ -86,12 +86,12 @@ WSGI_APPLICATION = 'blog.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/4.1/ref/settings/#databases
 
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
-    }
-}
+# DATABASES = {
+#     'default': {
+#         'ENGINE': 'django.db.backends.sqlite3',
+#         'NAME': BASE_DIR / 'db.sqlite3',
+#     }
+# }
 
 REST_FRAMEWORK = {
     'DEFAULT_PAGINATION_CLASS': 'rest_framework.pagination.PageNumberPagination',
@@ -118,11 +118,11 @@ REST_FRAMEWORK = {
         'rest_framework.permissions.AllowAny'
 
     ],
-    'DEFAULT_AUTHENTICATION_CLASSES': [
-        # 'rest_framework.authentication.BasicAuthentication',
-        # 'rest_framework.authentication.SessionAuthentication',
-        'knox.auth.TokenAuthentication',
-    ]
+    # 'DEFAULT_AUTHENTICATION_CLASSES': [
+    #     # 'rest_framework.authentication.BasicAuthentication',
+    #     # 'rest_framework.authentication.SessionAuthentication',
+    #     'knox.auth.TokenAuthentication',
+    # ]
 }
 
 # Password validation

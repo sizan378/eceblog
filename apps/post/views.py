@@ -5,9 +5,9 @@ from rest_framework.response import Response
 from rest_framework import status
 from rest_framework.generics import GenericAPIView, ListCreateAPIView, RetrieveAPIView
 
-from post.models import ArticleModel, CategoryModel
+from .models import ArticleModel, CategoryModel
 from .serializer import ArticleSerializer, CategorySerializer
-from post.pagination import CustomNumberPagination
+from .pagination import CustomNumberPagination
 
 
 class ArticleListView(GenericAPIView):

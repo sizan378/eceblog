@@ -1,6 +1,5 @@
-
 from django.urls import path
-from post.views import ArticleListView, ArticleDetailView, CategoryView, CategoryUpdateView
+from .views import ArticleListView, ArticleDetailView, CategoryView, CategoryUpdateView
 
 urlpatterns = [
     path('', ArticleListView.as_view()),

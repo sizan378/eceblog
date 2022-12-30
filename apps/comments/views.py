@@ -2,8 +2,8 @@
 
 from rest_framework.generics import ListCreateAPIView, RetrieveUpdateAPIView
 
-from comments.models import CommentsModel
-from comments.serializers import CommentSerializers
+from .models import CommentsModel
+from .serializers import CommentSerializers
 
 
 class CommentListView(ListCreateAPIView):

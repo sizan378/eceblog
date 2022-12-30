@@ -1,5 +1,5 @@
 from django.db import models
-from comments.models import CommentsModel
+from apps.comments.models import CommentsModel
 
 
 class CategoryModel(models.Model):

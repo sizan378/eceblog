@@ -7,7 +7,7 @@ from rest_framework.permissions import IsAuthenticated, IsAdminUser
 from rest_framework.response import Response
 from rest_framework import status
 from rest_framework.generics import GenericAPIView
-from post.pagination import CustomNumberPagination
+from apps.post.pagination import CustomNumberPagination
 # from rest_framework import authentication, IsA
 
 class NoticeListView(GenericAPIView):

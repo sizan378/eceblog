@@ -36,10 +36,10 @@ urlpatterns = [
          cache_timeout=0), name='schema-redoc'),
 
     # app path
-    path('api/v1/notice/', include('notice.urls')),
-    path('api/v1/post/', include('post.urls')),
-    path('api/v1/userprofile/', include('userprofile.urls')),
-    # path('api/v1/account/', include('account.urls')),
-    path('api/v1/comments/', include('comments.urls')),
+    path('api/v1/notice/', include('apps.notice.urls')),
+    path('api/v1/post/', include('apps.post.urls')),
+    path('api/v1/userprofile/', include('apps.userprofile.urls')),
+    path('api/v1/users/', include('apps.users.urls')),
+    path('api/v1/comments/', include('apps.comments.urls')),
 ] + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
 static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

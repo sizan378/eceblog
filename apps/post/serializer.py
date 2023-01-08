@@ -6,10 +6,11 @@ from .models import ArticleModel, CategoryModel
 class ArticleSerializer(ModelSerializer):
     class Meta:
         model = ArticleModel
-        fields = ('id','title','body','status','created_at','updated_at')
+        fields = ('id', 'author_name', 'title', 'body', 'category', 'image',
+                  'status', 'created_at', 'updated_at')
 
 
 class CategorySerializer(ModelSerializer):
     class Meta:
         model = CategoryModel
-        fields = ('id','title')
+        fields = ('id', 'title')

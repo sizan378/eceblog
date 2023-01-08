@@ -3,7 +3,7 @@ from .models import ArticleModel, CategoryModel
 
 
 class ArticleAdmin(admin.ModelAdmin):
-    list_display = ('id', 'author_name', 'title',
+    list_display = ('id', 'author_name', 'title', 'category',
                     'status', 'created_at', 'updated_at')
     search_fields = ['title', 'author_name']
     list_per_page = 25  # No of records per page

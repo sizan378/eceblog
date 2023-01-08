@@ -1,10 +1,13 @@
 import pytest
 
-# def test_article_author_name(db, articlemodel_factory):
-#     articlemodel = articlemodel_factory.create()
-#     print(articlemodel_factory.author_name)
-#     assert articlemodel
+@pytest.mark.django_db
+def test_category(category_model_factory):
+    # print(category_model_factory.title)
+    title = category_model_factory.create()
+    assert title == title
 
 
-def test_article():
-    assert 1 == 1
+def test_article(db,article_model_factory):
+    # print(article_model_factory.body)
+    article = article_model_factory.create()
+    assert article == article

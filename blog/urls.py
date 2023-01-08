@@ -41,5 +41,4 @@ urlpatterns = [
     path('api/v1/userprofile/', include('apps.userprofile.urls')),
     path('api/v1/users/', include('apps.users.urls')),
     path('api/v1/comments/', include('apps.comments.urls')),
-] + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
-static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

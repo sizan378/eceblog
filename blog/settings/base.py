@@ -10,23 +10,28 @@ For the full list of settings and their values, see
 https://docs.djangoproject.com/en/4.1/ref/settings/
 """
 
+
+import environ
 import os
 from pathlib import Path
 
+env = environ.Env(DEBUG=(bool, False))
+
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
+environ.Env.read_env(BASE_DIR / "../env/development.env")
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/4.1/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'django-insecure-3)c6o0jl&tq&b&#*j@!oh#bdsii_(!7m8i0rms(+7lvq&(r_+f'
+SECRET_KEY = os.environ.get("SECRET_KEY", default="unsafe-secret-key")
+print("SECRET",SECRET_KEY)
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = os.environ.get('DEBUG', default=False)
 
-ALLOWED_HOSTS = []
-
+ALLOWED_HOSTS = os.environ.get("ALLOWED_HOSTS").split(' ')
 
 # Application definition
 
@@ -105,7 +110,6 @@ REST_FRAMEWORK = {
 }
 
 
-
 REST_FRAMEWORK = {
     'DEFAULT_PERMISSION_CLASSES': [
         'rest_framework.permissions.AllowAny'
@@ -159,3 +163,6 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 
 AUTH_USER_MODEL = 'users.CustomUser'
+
+# log configuration
+# LOGGING = LOGGING

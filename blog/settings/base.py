@@ -15,6 +15,9 @@ import environ
 import os
 from pathlib import Path
 
+from blog.jwt_settings import SIMPLE_JWT
+
+
 env = environ.Env(DEBUG=(bool, False))
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
@@ -26,7 +29,6 @@ environ.Env.read_env(BASE_DIR / "../env/development.env")
 
 # SECURITY WARNING: keep the secret key used in production secret!
 SECRET_KEY = os.environ.get("SECRET_KEY", default="unsafe-secret-key")
-print("SECRET",SECRET_KEY)
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = os.environ.get('DEBUG', default=False)
@@ -48,6 +50,8 @@ DJANGO_APPS = [
 THIRD_PARTY_APPS = [
     'drf_yasg',
     'rest_framework',
+    'rest_framework_simplejwt',
+    'corsheaders',
 ]
 
 LOCAL_APPS = [
@@ -62,10 +66,13 @@ INSTALLED_APPS = DJANGO_APPS + THIRD_PARTY_APPS + LOCAL_APPS
 
 SITE_ID = 1
 
+SIMPLE_JWT = SIMPLE_JWT
+
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
     'whitenoise.middleware.WhiteNoiseMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
+    'corsheaders.middleware.CorsMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
@@ -104,17 +111,19 @@ WSGI_APPLICATION = 'blog.wsgi.application'
 #     }
 # }
 
+# REST_FRAMEWORK = {
+#     'DEFAULT_PAGINATION_CLASS': 'rest_framework.pagination.PageNumberPagination',
+#     'PAGE_SIZE': 5
+# }
+
 REST_FRAMEWORK = {
-    'DEFAULT_PAGINATION_CLASS': 'rest_framework.pagination.PageNumberPagination',
-    'PAGE_SIZE': 5
-}
+    # 'DEFAULT_PERMISSION_CLASSES': [
+    #     'rest_framework.permissions.IsAuthenticated',
 
-
-REST_FRAMEWORK = {
-    'DEFAULT_PERMISSION_CLASSES': [
-        'rest_framework.permissions.AllowAny'
-
-    ],
+    # ],
+    'DEFAULT_AUTHENTICATION_CLASSES': (
+        'rest_framework_simplejwt.authentication.JWTAuthentication',
+    )
 }
 
 # Password validation
@@ -166,3 +175,8 @@ AUTH_USER_MODEL = 'users.CustomUser'
 
 # log configuration
 # LOGGING = LOGGING
+
+CORS_ALLOWED_ORIGINS = [
+    'http://localhost:3000',
+    'http://127.0.0.1:3000',
+]

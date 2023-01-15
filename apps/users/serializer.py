@@ -1,31 +1,31 @@
-# from rest_framework.serializers import ModelSerializer
-# from django.contrib.auth.models import User, Group
-
-# # User Serializer
-# class UserSerializer(ModelSerializer):
-#     class Meta:
-#         model = User
-#         fields = ('id', 'username', 'email')
-
-# # Register Serializer
-# class RegisterSerializer(ModelSerializer):
-#     class Meta:
-#         model = User
-#         fields = ('id', 'username', 'email', 'password')
-#         extra_kwargs = {'password': {'write_only': True}}
-
-#     def create(self, validated_data):
-#         user = User.objects.create_user(validated_data['username'], validated_data['email'], validated_data['password'])
-
-#         return user
+from rest_framework.serializers import ModelSerializer
+from .models import CustomUser
+from rest_framework_simplejwt.serializers import TokenObtainPairSerializer
+from rest_framework_simplejwt.tokens import RefreshToken
 
 
-# class AdminPanelSerializer(ModelSerializer):
-#     class Meta:
-#         model = User
-#         fields = "__all__"
+class CustomUserSerializer(ModelSerializer):
+    class Meta:
+        model = CustomUser
+        fields = ['id', 'email', 'first_name', 'last_name', 'city',]
 
-# class AdminGroupSerializer(ModelSerializer):
-#     class Meta:
-#         model = Group
-#         fields = '__all__'
+    # @classmethod
+    # def get_token(cls, user):
+    #     token = super().get_token(user)
+
+    #     # Add custom claims
+    #     token['email'] = user.email
+    #     token['first_name'] = user.first_name
+    #     token['last_name'] = user.last_name
+    #     token['is_active'] = user.is_active
+    #     token['is_staff'] = user.is_staff
+
+    #     return token
+    # def create(self, validated_data):
+    #     return CustomUser.objects.create_user(**validated_data)
+
+class CustomUserLogin(ModelSerializer):
+    class Meta:
+        model = CustomUser
+        fields = ['email', 'password', ]
+   

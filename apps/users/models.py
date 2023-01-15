@@ -7,6 +7,9 @@ from .manage import CustomUserManager
 
 class CustomUser(AbstractBaseUser, PermissionsMixin):
     email = models.EmailField(_('Email'), unique=True)
+    first_name= models.CharField(_('First Name'), max_length=50, blank=True, null=True)
+    last_name= models.CharField(_('Last Name'), max_length=50, blank=True, null=True)
+    city = models.CharField(_('City'), max_length=50, blank=True, null=True)
     is_staff = models.BooleanField(default=False)
     is_active = models.BooleanField(default=True)
     is_superuser = models.BooleanField(default=False)

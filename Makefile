@@ -37,7 +37,7 @@ volume:
 	docker volume inspect eceblog_postgres_data
 
 # home-sales-db:
-# 	docker compose exec postgres-db psql --username=admin --dbname=homesale
+# 	docker compose exec postgres-db psql --username=admin --dbname=postgres
 
 # pytest:
 # 	docker compose exec ece-blog pytest -p no:warnings --cov=.
@@ -52,16 +52,16 @@ volume:
 # 	docker compose exec ece-blog black --check --exclude=migrations .
 
 # black-diff:
-# 	docker compose exec home-sales black --diff --exclude=migrations .
+# 	docker compose exec ece-blog black --diff --exclude=migrations .
 	
 # black:
-# 	docker compose exec home-sales black --exclude=migrations .
+# 	docker compose exec ece-blog black --exclude=migrations .
 
 # isort-check:
-# 	docker compose exec home-sales isort . --check-only --skip env --skip migrations
+# 	docker compose exec ece-blog isort . --check-only --skip env --skip migrations
 
 # isort-diff:
-# 	docker compose exec home-sales isort . --diff --skip env --skip migrations
+# 	docker compose exec ece-blog isort . --diff --skip env --skip migrations
 
 # isort:
-# 	docker compose exec home-sales isort . --skip env --skip migrations
+# 	docker compose exec ece-blog isort . --skip env --skip migrations

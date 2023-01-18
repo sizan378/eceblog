@@ -1,12 +1,9 @@
 from rest_framework.response import Response
-from rest_framework import status
 from rest_framework.views import APIView
-from django.contrib.auth import authenticate
-from rest_framework.permissions import AllowAny
+from django.contrib.auth import authenticate, login
 from rest_framework_simplejwt.tokens import RefreshToken
 
 from .serializer import CustomUserSerializer, CustomUserLogin
-from rest_framework_simplejwt.views import TokenObtainPairView
 
 
 def get_tokens_for_user(user):
@@ -17,6 +14,7 @@ def get_tokens_for_user(user):
         'access': str(refresh.access_token),
     }
 
+
 class UserRegistration(APIView):
     def post(self, request, format=None):
         serializer = CustomUserSerializer(data=request.data)
@@ -25,6 +23,7 @@ class UserRegistration(APIView):
             token = get_tokens_for_user(user)
             return Response({"token": token})
         return Response(serializer.error_messages)
+
 
 class UserLogin(APIView):
     def post(self, request, format=None):
@@ -35,12 +34,7 @@ class UserLogin(APIView):
             user = authenticate(email=email, password=password)
             if user is not None:
                 token = get_tokens_for_user(user)
+                login(request, user)
                 return Response({"token": token})
             else:
                 return Response("please provide email and password")
-
-# class UserRegistration(TokenObtainPairView):
-#     '''For admin Get access token & refresh token
-#     and update last_login'''
-#     permission_classes = (AllowAny,)
-#     serializer_class = CustomUserSerializer
